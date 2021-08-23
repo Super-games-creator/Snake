@@ -1,6 +1,6 @@
 import tkinter as tk
 import random
-from .conf import CW, CH, MX, MY, H_PANEL, W, ROWS, COLS, H
+from .conf import MX, MY, H_PANEL, W, ROWS, COLS, H
 from .helper import get_x, get_y
 
 
@@ -9,6 +9,7 @@ class Board:
         self.canvas = canvas  # это поле класса
         self.food = []
         self.restart = tk.IntVar()  # для рестарта
+        self.image = tk.PhotoImage(file="./images/apple.png")
         self.score = 0
 
     def draw(self):  # это метод класса
@@ -20,7 +21,8 @@ class Board:
     def draw_food(self, cx, cy):
         x = get_x(cx)
         y = get_y(cy)
-        self.canvas.create_oval(x, y, x + CW, y + CH, fill="red", tag=f"food{cx}x{cy}")
+        # self.canvas.create_oval(x, y, x + CW, y + CH, fill="red", tag=f"food{cx}x{cy}")
+        self.canvas.create_image(x, y, image=self.image, anchor=tk.NW, tag=f"food{cx}x{cy}")
 
     def draw_panel(self):
         self.canvas.delete("panel")
